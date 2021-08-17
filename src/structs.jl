@@ -1,34 +1,30 @@
 # An AbstractSpatialGraph must contain the following elements:
 # - graph::AbstractGraph
 abstract type AbstractSpatialGraph{T} <: AbstractGraph{T} end
-abstract type AbstractSpatialDiGraph{T} <: AbstractSpatialGraph{T} end
+abstract type AbstractSpatialWeightedGraph{T} <: AbstractSpatialGraph{T} end
 
-# An AbstractWeightedSpatialGraph must contain the following elements:
-# - graph::AbstractGraph
-abstract type AbstractWeightedSpatialGraph{T} <: AbstractSpatialGraph{T} end
-
-mutable struct WeightedRasterGraph{T<:Integer, U<:Real} <: AbstractWeightedSpatialGraph{T}
+mutable struct WeightedRasterGraph{T<:Integer, U<:Real} <: AbstractSpatialWeightedGraph{T}
     graph::SimpleWeightedGraph{T, U} # a SimpleWeightedGraph with edge weights
     node_array::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
     wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
     transform::Vector # The geo transform, from ArchGDAL.getgeotransform()
 end
 
-mutable struct WeightedRasterDiGraph{T<:Integer, U<:Real} <: AbstractWeightedSpatialGraph{T}
+mutable struct WeightedRasterDiGraph{T<:Integer, U<:Real} <: AbstractSpatialWeightedGraph{T}
     graph::SimpleWeightedDiGraph{T, U} # a SimpleWeightedDiGraph with edge weights
     node_array::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
     wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
     transform::Vector # The geo transform, from ArchGDAL.getgeotransform()
 end
 
-mutable struct RasterGraph{T<:Integer} <: AbstractGraph{T}
+mutable struct RasterGraph{T<:Integer} <: AbstractSpatialGraph{T}
     graph::SimpleGraph{T} # A SimpleGraph
     node_matrix::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
     wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
     transform::Vector # The geo transform, from ArchGDAL.getgeotransform()
 end
 
-mutable struct RasterDiGraph{T<:Integer} <: AbstractGraph{T}
+mutable struct RasterDiGraph{T<:Integer} <: AbstractSpatialGraph{T}
     graph::SimpleDiGraph{T} # A SimpleDiGraph
     node_array::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
     wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
