@@ -7,6 +7,7 @@ version = "0.0.1"
 ArchGDAL = "c9ce4bd3-c3d5-55b8-8973-c0e20141b8c3"
 LightGraphs = "093fc24a-ae57-5d10-9952-331d41423f4d"
 SimpleWeightedGraphs = "47aef6b3-ad0c-573a-a1e2-d07658019622"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
 ArchGDAL = "0.6"
