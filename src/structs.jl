@@ -1,7 +1,7 @@
 # An AbstractSpatialGraph must contain the following elements:
 # - graph::AbstractGraph
 abstract type AbstractSpatialGraph{T} <: AbstractGraph{T} end
-abstract type ABstractSpatialDiGraph{T} <: AbstractDiGraph end
+abstract type ABstractSpatialDiGraph{T} <: AbstractSpatialGraph{T} end
 
 # An AbstractWeightedSpatialGraph must contain the following elements:
 # - graph::AbstractGraph
