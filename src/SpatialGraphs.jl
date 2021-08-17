@@ -1,5 +1,5 @@
 module SpatialGraphs
 
-greet() = print("Hello World!")
+using LightGraphs, SimpleWeightedGraphs, ArchGDAL
 
 end # module
