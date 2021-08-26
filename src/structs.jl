@@ -1,79 +1,64 @@
-# An AbstractSpatialGraph must contain the following elements:
-# - graph::AbstractGraph
+## All types and structs for SpatialGraphs.jl
 """
     AbstractSpatialGraph{T}
 
 An abstract type representing a spatially referenced graph.
+
+An AbstractSpatialGraph must contain the following attributes/element:
+
+- `graph::AbstractGraph`
 """
 abstract type AbstractSpatialGraph{T} <: AbstractGraph{T} end
 
 """
-    AbstractSpatialWeightedGraph{T}
+    AbstractRsterGraph{T}
 
-An abstract type representing a spatially referenced weighted graph.
+An abstract type representing a spatially referenced graph, with graph vertices corresponding to pixels in a raster.
+
+An AbstractSpatialGraph must contain the following attributes/element:
+
+- `graph::AbstractGraph`
+- `node_raster::GeoArray`
 """
-abstract type AbstractSpatialWeightedGraph{T} <: AbstractSpatialGraph{T} end
+abstract type AbstractRasterGraph{T} <: AbstractSpatialGraph{T} end
 
 """
     WeightedRasterGraph{T}
 
 A composite type for a spatially referenced weighted graph. Vertices are spatially referenced based on a raster.
 """
-mutable struct WeightedRasterGraph{T<:Integer, U<:Real} <: AbstractSpatialWeightedGraph{T}
+mutable struct WeightedRasterGraph{T<:Integer, U<:Real} <: AbstractRasterGraph{T}
     graph::SimpleWeightedGraph{T, U} # a SimpleWeightedGraph with edge weights
-    node_array::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
-    wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
-    transform::Vector # The geo transform, from ArchGDAL.getgeotransform()
+    node_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
 end
 """
     WeightedRasterDiGraph{T}
 
 A composite type for a spatially referenced, weighted, directed graph. Vertices are spatially referenced based on a raster.
 """
-mutable struct WeightedRasterDiGraph{T<:Integer, U<:Real} <: AbstractSpatialWeightedGraph{T}
+mutable struct WeightedRasterDiGraph{T<:Integer, U<:Real} <: AbstractRasterGraph{T}
     graph::SimpleWeightedDiGraph{T, U} # a SimpleWeightedDiGraph with edge weights
-    node_array::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
-    wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
-    transform::Vector # The geo transform, from ArchGDAL.getgeotransform()
+    node_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
 end
 
 """
-    RasterGraph{T}
+    SimpleRasterGraph{T}
 
 A composite type for a spatially referenced graph. Vertices are spatially referenced based on a raster.
+
+A RasterGraph
 """
-mutable struct RasterGraph{T<:Integer} <: AbstractSpatialGraph{T}
+mutable struct SimpleRasterGraph{T<:Integer} <: AbstractRasterGraph{T}
     graph::SimpleGraph{T} # A SimpleGraph
-    node_matrix::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
-    wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
-    transform::Vector # The geo transform, from ArchGDAL.getgeotransform()
+    node_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
 end
 
 """
-    RasterGraph{T}
+    SimpleRasterDiGraph{T}
 
 A composite type for a spatially referenced directed graph. Vertices are spatially referenced based on a raster.
 """
-mutable struct RasterDiGraph{T<:Integer} <: AbstractSpatialGraph{T}
+mutable struct SimpleRasterDiGraph{T<:Integer} <: AbstractRasterGraph{T}
     graph::SimpleDiGraph{T} # A SimpleDiGraph
-    node_array::Matrix{T} # An array of nodes, where index corresponds to position in geographic space
-    wkt::String # A WellKnownText representation of the original raster's projection, from ArchGDAL.getproj()
-    transform::Vector # The geo transform, from ArchGDAL.getgeotransform()
+    node_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
 end
-
-### LightGraphs interface
-nv(g::AbstractSpatialGraph) = nv(g.graph)
-ne(g::AbstractSpatialGraph) = ne(g.graph)
-vertices(g::AbstractSpatialGraph) = vertices(g.graph)
-edges(g::AbstractSpatialGraph) = edges(g.graph)
-Base.eltype(g::AbstractSpatialGraph) = eltype(g.graph)
-edgetype(g::AbstractSpatialGraph) = edgetype(g.graph)
-has_edge(g::AbstractSpatialGraph, s, d) = has_edge(g.graph, s, d)
-has_vertex(g::AbstractSpatialGraph, v) = has_vertex(g.graph, v)
-inneighbors(g::AbstractSpatialGraph, v) = inneighbors(g.graph, v)
-outneighbors(g::AbstractSpatialGraph, v) = outneighbors(g.graph, v)
-is_directed(g::AbstractSpatialGraph) = is_directed(g.graph)
-Base.zero(g::AbsractSpatialGraph) = zero(g.graph)
-
-### SimpleWeightedGraphs interface
-get_weight(g::AbstractWeightedSpatialGraph, u::Integer, v::Integer) = get_weight(g.graph, u, v)
