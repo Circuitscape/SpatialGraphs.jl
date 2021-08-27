@@ -2,8 +2,8 @@
 
 SpatialGraphs.jl introduces the `AbstractSpatialGraph`. `AbstractSpatialGraphs` 
 are a subtype of `LightGraphs.AbstractGraph`, and can be weighted or directed. 
-AbstractSpatialGraphs are AbstractGraphs, methods from LightGraphs.jl and 
-SimpleWeightedGraphs.jl work right out of the box.
+AbstractSpatialGraphs are AbstractGraphs, methods from LightGraphs.jl work right
+out of the box.
 
 `AbstractSpatialGraph`s themselves contain an `AbstractGraph` in addition to 
 metadata that details the spatial location of each vertex in the
