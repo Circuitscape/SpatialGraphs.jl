@@ -1,6 +1,3 @@
-# Fixes GR warnings in Travis
-ENV["GKSwstype"] = "100"
-
 using Documenter, SpatialGraphs
 
 const formats = Any[
