@@ -11,7 +11,7 @@ An AbstractSpatialGraph must contain the following attributes/element:
 abstract type AbstractSpatialGraph{T} <: AbstractGraph{T} end
 
 """
-    AbstractRsterGraph{T}
+    AbstractRasterGraph{T}
 
 An abstract type representing a spatially referenced graph, with graph vertices corresponding to pixels in a raster.
 
