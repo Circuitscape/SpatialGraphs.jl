@@ -1,5 +1,11 @@
 # SpatialGraphs.jl
 
-SpatialGraphs.jl is  low level package that offers types and constructors for
-spatially referenced graphs. The primary type is `SpatialGraph`, which is a 
-`LightGraphs.AbstractGraph`.
+SpatialGraphs.jl introduces the `AbstractSpatialGraph`. `AbstractSpatialGraphs` 
+are a subtype of `LightGraphs.AbstractGraph`, and can be weighted or directed.
+SpatialGraphs.jl is useful for turning spatial data into graphs. This can be
+useful for landscape connectivity analysis, hydrology, and other spatial
+network processes. AbstractSpatialGraphs are AbstractGraphs, methods from 
+LightGraphs.jl and SimpleWeightedGraphs.jl work right out of the box. 
+Go to [Graph Types](@ref) for more details on the graph types implemented in 
+this package.
+
