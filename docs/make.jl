@@ -17,7 +17,8 @@ makedocs(
     modules = [SpatialGraphs],
     authors = "Vincent A. Landau",
     sitename = "SpatialGraphs.jl",
-    pages = ["About" => "index.md"],
+    pages = ["About" => "index.md",
+             "Graph Types" => "graphtypes.md"],
 )
 
 deploydocs(
