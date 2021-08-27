@@ -5,7 +5,7 @@ const formats = Any[
     	assets = [
     		"assets/custom.css"
     	],
-	edit_link = :commit,
+	    edit_link = :commit,
     ),
 ]
 
