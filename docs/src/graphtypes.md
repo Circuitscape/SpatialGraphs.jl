@@ -1,4 +1,4 @@
-# Graph Types in SpatialGraphs.jl
+# [Graph Types in SpatialGraphs.jl](@id graph_types)
 
 At this time, only raster-based graph types have been developed (and 
 vertex locations are stored in a `GeoData.GeoArray`), but there are plans to 
