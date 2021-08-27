@@ -1,6 +1,6 @@
 # SpatialGraphs.jl
 
-[![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://docs.circuitscape.org/SpatialGraphs.jl/stable)
+[![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://docs.circuitscape.org/SpatialGraphs.jl/latest)
 
 SpatialGraphs.jl introduces the `AbstractSpatialGraph`. `AbstractSpatialGraphs` 
 are a subtype of `LightGraphs.AbstractGraph`, and can be weighted or directed. 
