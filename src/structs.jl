@@ -4,7 +4,7 @@
 
 An abstract type representing a spatially referenced graph.
 
-An AbstractSpatialGraph must contain the following attributes/element:
+An AbstractSpatialGraph must contain the following field:
 
 - `graph::AbstractGraph`
 """
@@ -15,7 +15,7 @@ abstract type AbstractSpatialGraph{T} <: AbstractGraph{T} end
 
 An abstract type representing a spatially referenced graph, with graph vertices corresponding to pixels in a raster.
 
-An AbstractSpatialGraph must contain the following attributes/element:
+An AbstractRasterGraph must contain the following fields:
 
 - `graph::AbstractGraph`
 - `vertex_raster::GeoArray`
@@ -45,8 +45,6 @@ end
     SimpleRasterGraph{T}
 
 A composite type for a spatially referenced graph. Vertices are spatially referenced based on a raster.
-
-A RasterGraph
 """
 mutable struct SimpleRasterGraph{T<:Integer} <: AbstractRasterGraph{T}
     graph::SimpleGraph{T} # A SimpleGraph
