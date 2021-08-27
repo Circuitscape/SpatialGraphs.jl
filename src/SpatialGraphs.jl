@@ -5,7 +5,7 @@ using LightGraphs, SimpleWeightedGraphs, ArchGDAL, GeoData
 include("structs.jl")
 include("graph_interface.jl")
 ## Types and Structs
-export AbstractSpatialGraph, AbstractRasterGraph, SimpleRasterGraphs,
+export AbstractSpatialGraph, AbstractRasterGraph, SimpleRasterGraph,
        SimpleRasterDiGraph, WeightedRasterGraph, WeightedRasterDiGraph
 
 end # module
