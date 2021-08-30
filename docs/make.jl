@@ -15,7 +15,8 @@ makedocs(
     authors = "Vincent A. Landau",
     sitename = "SpatialGraphs.jl",
     pages = ["About" => "index.md",
-             "Graph Types" => "graphtypes.md"],
+             "Graph Types" => "graphtypes.md",
+             "User Guide" => "userguide.md"],
 )
 
 deploydocs(

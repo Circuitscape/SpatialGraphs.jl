@@ -3,3 +3,4 @@ run-dev.sh
 Manifest.toml
 docs/build
 docs/make-local.jl
+local
