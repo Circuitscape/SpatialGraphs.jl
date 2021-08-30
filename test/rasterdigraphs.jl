@@ -2,17 +2,23 @@ using ArchGDAL, GeoData, LightGraphs, SimpleWeightedGraphs, SpatialGraphs
 A_array = Array{Float64}(undef, (3, 4, 1))
 A_array[:,:,:] = [1, 3, 2, 0.5, 10, 8, 5, -9999, 3, 1, 2, 6]
 
+condition_array = Array{Float64}(undef, (3, 4, 1))
+condition_array[:,:,:] = [1, 3, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 7]
+
 x = X(1:4)
 y = Y(1:3)
 band = Band(1:1)
 
 weight_raster = GeoArray(A_array, (y, x, band), missingval = -9999)
-weight_raster2d = GeoArray(A_array[:, :, 1], (y, x), missingval = -9999)
-rasgraph2d = weightedrastergraph(weight_raster2d)
-rasgraph = weightedrastergraph(weight_raster)
+condition_raster = GeoArray(condition_array, (y, x, band), missingval = -9999)
 
-# Test that graphs are the same regardless of whether weight_raster has Band dim
-@test rasgraph2d.graph == rasgraph.graph
+compare = <
+rasgraph = weightedrastergraph(
+    weight_raster,
+    directed = true,
+    condition_raster = condition_raster,
+    condition = compare
+)
 
 # no vertices in NoData pixels?
 @test (rasgraph.vertex_raster .== 0) == 
@@ -36,6 +42,12 @@ for i in 1:length(graph_edges)
 
     source_coords = findall(rasgraph.vertex_raster .== source_i)[1]
     dest_coords = findall(rasgraph.vertex_raster .== dest_i)[1]
+
+    # Check that condition is met
+    @test compare(
+        condition_raster[source_coords],
+        condition_raster[dest_coords]
+    )
 
     # Test that source row is within 1 step of dest row
     row_diff = abs(source_coords[1] - dest_coords[1])

@@ -29,6 +29,7 @@ end
     weightedrastergraph(
         weight_raster::GeoArray;
         directed::Bool = false,
+        condition_raster::GeoArray = weight_raster,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
         connect_using_avg_raster_val::Bool = true
@@ -307,7 +308,7 @@ function make_raster_graph(
                     north_idx = CartesianIndex((row - 1, column))
 
                     # "West"
-                    if column != dims[2] && vertex_raster[west_idx] != 0 && 
+                    if column != 1 && vertex_raster[west_idx] != 0 && 
                         weight_raster[west_idx] != no_data_val
                         if condition(condition_raster[source_idx],
                                      condition_raster[west_idx])
@@ -320,7 +321,7 @@ function make_raster_graph(
                     end
 
                     # "North"
-                    if column != dims[2] && vertex_raster[north_idx] != 0 && 
+                    if row != 1 && vertex_raster[north_idx] != 0 && 
                         weight_raster[north_idx] != no_data_val
                         if condition(condition_raster[source_idx],
                                      condition_raster[north_idx])
@@ -339,7 +340,7 @@ function make_raster_graph(
                         sw_idx = CartesianIndex((row + 1, column - 1))
 
                         # "Northwest"
-                        if column != dims[2] && row != 1 && 
+                        if column != 1 && row != 1 && 
                             vertex_raster[nw_idx] != 0 && 
                             weight_raster[nw_idx] != no_data_val
                             if condition(condition_raster[source_idx],
@@ -353,7 +354,7 @@ function make_raster_graph(
                         end
 
                         # "Southwest"
-                        if row != dims[1] && column != dims[2] && 
+                        if row != dims[1] && column != 1 && 
                             vertex_raster[sw_idx] != 0  && 
                             weight_raster[sw_idx] != no_data_val
                             if condition(condition_raster[source_idx],

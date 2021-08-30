@@ -1,5 +1,9 @@
 using Test, SpatialGraphs
 
-@testset "placeholder" begin
+@testset "Raster Graph Construction" begin
+    include("rastergraphs.jl")
+end
 
+@testset "Raster DiGraph Construction" begin
+    include("rasterdigraphs.jl")
 end
