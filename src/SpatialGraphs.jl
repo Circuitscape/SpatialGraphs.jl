@@ -1,6 +1,6 @@
 module SpatialGraphs
 
-using LightGraphs, SimpleWeightedGraphs, ArchGDAL, GeoData
+using LightGraphs, SimpleWeightedGraphs, SparseArrays, GeoData
 
 include("structs.jl")
 include("graph_interface.jl")
@@ -13,6 +13,8 @@ export AbstractSpatialGraph, AbstractRasterGraph, SimpleRasterGraph,
        SimpleRasterDiGraph, WeightedRasterGraph, WeightedRasterDiGraph
 
 ## Raster graph
-export make_raster_graph, weightedrastergraph
+export make_weighted_raster_graph, weightedrastergraph,
+    make_simple_raster_graph, simplerastergraph
+
 
 end # module
