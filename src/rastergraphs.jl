@@ -48,7 +48,7 @@ weights between pixels. Any pixel in `weight_raster` with a value not equal to
 `weight_raster.missingval` will be assigned a vertex in the graph (corresponding
 to its centroid). 
 
-##Arguments
+## Arguments
 `directed`: A `Bool` determining whether the graph should be directed.
 
 `condition_raster`: A raster with values that can be used to determine whether
@@ -153,7 +153,7 @@ to its centroid).
 `vertex_raster`: A `GeoData.GeoArray` with integer values ranging from 1:n, 
 where n is the number of unique vertices in the graph. 
 
-##Arguments
+## Arguments
 `directed`: A `Bool` determining whether the graph should be directed.
 
 `condition_raster`: A raster with values that can be used to determine whether
