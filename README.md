@@ -1,6 +1,8 @@
 # SpatialGraphs.jl
 
-[![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://docs.circuitscape.org/SpatialGraphs.jl/latest) [![codecov](https://codecov.io/gh/Circuitscape/SpatialGraphs.jl/branch/main/graph/badge.svg?token=67OX4UPWOL)](https://codecov.io/gh/Circuitscape/SpatialGraphs.jl)
+| **Documentation** | **Build Status**|
+|:-----------------------------------------------------:|:------------------------------------:|
+[![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://docs.circuitscape.org/SpatialGraphs.jl/latest) | [![Build Status](https://github.com/Circuitscape/SpatialGraphs.jl/workflows/CI/badge.svg)](https://github.com/Circuitscape/SpatialGraphs.jl/actions?query=workflow%3ACI) [![codecov](https://codecov.io/gh/Circuitscape/SpatialGraphs.jl/branch/main/graph/badge.svg?token=67OX4UPWOL)](https://codecov.io/gh/Circuitscape/SpatialGraphs.jl)
 
 SpatialGraphs.jl introduces the `AbstractSpatialGraph`. `AbstractSpatialGraphs` 
 are a subtype of `LightGraphs.AbstractGraph`, and can be weighted or directed. 
