@@ -6,6 +6,8 @@ include("structs.jl")
 include("graph_interface.jl")
 include("rastergraphs.jl")
 include("utils.jl")
+include("show.jl")
+
 ## Types and Structs
 export AbstractSpatialGraph, AbstractRasterGraph, SimpleRasterGraph,
        SimpleRasterDiGraph, WeightedRasterGraph, WeightedRasterDiGraph

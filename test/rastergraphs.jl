@@ -1,4 +1,4 @@
-using ArchGDAL, GeoData, LightGraphs, SimpleWeightedGraphs, SpatialGraphs
+using GeoData, LightGraphs, SimpleWeightedGraphs, SpatialGraphs, Test
 A_array = Array{Float64}(undef, (3, 4, 1))
 A_array[:,:,:] = [1, 3, 2, 0.5, 10, 8, 5, -9999, 3, 1, 2, 6]
 
