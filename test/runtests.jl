@@ -1,9 +1,13 @@
 using Test, SpatialGraphs
 
-@testset "Raster Graph Construction" begin
-    include("rastergraphs.jl")
+@testset "Weighted Raster Graph Construction" begin
+    include("weightedrastergraphs.jl")
 end
 
-@testset "Raster DiGraph Construction" begin
-    include("rasterdigraphs.jl")
+@testset "Simple Raster DiGraph Construction" begin
+    include("simplerasterdigraphs.jl")
+end
+
+@testset "Weighted Raster DiGraph Construction" begin
+    include("weightedrasterdigraphs.jl")
 end

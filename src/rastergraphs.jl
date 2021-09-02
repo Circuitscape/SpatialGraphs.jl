@@ -162,15 +162,15 @@ increased distance between them (as compared to the distance between cardinal
 neighbors) is accounted for.
 """
 function simplerastergraph(
-    raster::GeoArray;
-    condition::Function = is_data,
-    directed::Bool = true,
-    cardinal_neighbors_only::Bool = false,
-)
-    v = make_vertex_raster(weight_raster)
+        raster::GeoArray;
+        condition::Function = is_data,
+        directed::Bool = true,
+        cardinal_neighbors_only::Bool = false,
+    )
+    v = make_vertex_raster(raster)
     g = make_simple_raster_graph(
         raster,
-        vertex_raster,
+        v,
         directed = directed,
         condition = condition,
         cardinal_neighbors_only = cardinal_neighbors_only
