@@ -5,10 +5,9 @@ import LightGraphs:
     inneighbors, outneighbors, is_directed, add_edge!
 
 import SimpleWeightedGraphs:
-    add_edge!, get_weight
+    add_edge!, get_weight, add_vertex!, vertices
 
-import Base:
-    eltype, zero
+import Base: zero
 
 ### LightGraphs interface
 nv(g::AbstractSpatialGraph) = nv(g.graph)
@@ -22,8 +21,31 @@ has_vertex(g::AbstractSpatialGraph, v) = has_vertex(g.graph, v)
 inneighbors(g::AbstractSpatialGraph, v) = inneighbors(g.graph, v)
 outneighbors(g::AbstractSpatialGraph, v) = outneighbors(g.graph, v)
 is_directed(g::AbstractSpatialGraph) = is_directed(g.graph)
-zero(g::AbstractSpatialGraph) = zero(g.graph)
+function Base.zero(g::AbstractRasterGraph)
+    if g.graph isa SimpleGraph
+        SimpleRasterGraph(
+            zero(typeof(g.graph)),
+            g.vertex_raster
+        )
+    elseif g.graph isa SimpleDiGraph
+        SimpleRasterDiGraph(
+            zero(typeof(g.graph)),
+            g.vertex_raster
+        )
+    elseif g.graph isa SimpleWeightedGraph
+        WeightedRasterGraph(
+            SimpleWeightedGraph{eltype(g.graph), weighttype(g.graph)}(),
+            g.vertex_raster
+        )
+    elseif g.graph isa SimpleWeightedDiGraph
+        WeightedRasterDiGraph(
+            SimpleWeightedDiGraph{eltype(g.graph), weighttype(g.graph)}(),
+            g.vertex_raster
+        )
+    end
+end
 add_edge!(g::AbstractSpatialGraph, a::Integer, b::Integer, c::Number) = add_edge!(g.graph, a, b, c)
+add_vertex!(g::AbstractSpatialGraph) = add_vertex!(g.graph)
 
 ### SimpleWeightedGraphs
 get_weight(g::WeightedRasterGraph, a::Integer, b::Integer) = get_weight(g.graph, a, b)
