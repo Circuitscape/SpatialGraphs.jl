@@ -2,10 +2,17 @@
 
 ## Building Graphs from Rasters
 
-SpatialGraphs.jl offers options methods for constructing graphs from raster
+SpatialGraphs.jl offers several functions for constructing graphs from raster
 data.
 
+### Simple Graphs
+```@docs
+simplerastergraph
+make_simple_raster_graph
+```
+
+### Weighted Graphs
 ```@docs
 weightedrastergraph
-make_raster_graph
+make_weighted_raster_graph
 ```
