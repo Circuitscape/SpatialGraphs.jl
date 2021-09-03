@@ -3,7 +3,7 @@ A_array = Array{Float64}(undef, (3, 4, 1))
 A_array[:,:,:] = [1, 3, 2, 0.5, 10, 8, 5, -9999, 3, 1, 2, 6]
 
 condition_array = Array{Float64}(undef, (3, 4, 1))
-condition_array[:,:,:] = [1, 3, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 7]
+condition_array[:,:,:] = [1, 0.5, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 7]
 
 x = X(1:4)
 y = Y(1:3)
@@ -68,3 +68,6 @@ for i in 1:length(graph_edges)
                                            weight_raster[dest_coords])
     end
 end
+
+@test is_directed(rasgraph)
+@test zero(rasgraph).vertex_raster == rasgraph.vertex_raster

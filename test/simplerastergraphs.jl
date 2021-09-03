@@ -1,31 +1,31 @@
 using GeoData, LightGraphs, SimpleWeightedGraphs, SpatialGraphs, Test
 
-condition_array = Array{Float64}(undef, (3, 4, 1))
-condition_array[:,:,:] = [1, 0.5, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 7]
+array = Array{Int}(undef, (3, 4, 1))
+array[:,:,:] = [1, 1, 1, 1, 2, 2, 2, -9999, 2, 3, 3, 3]
 
 x = X(1:4)
 y = Y(1:3)
 band = Band(1:1)
 
-condition_raster = GeoArray(condition_array, (y, x, band), missingval = -9999)
+raster = GeoArray(array, (y, x, band), missingval = -9999)
 
-compare = <
+compare = ==
 rasgraph = simplerastergraph(
-    condition_raster,
-    directed = true,
+    raster,
+    directed = false,
     condition = compare
 )
 
 # no vertices in NoData pixels?
 @test (rasgraph.vertex_raster .== 0) == 
-        ((condition_raster .== condition_raster.missingval) .| 
-         isnan.(condition_raster))
+        ((raster .== raster.missingval) .| 
+         isnan.(raster))
 
 # Is the number of of vertices correct, and is the range of values correct?
 @test sort(collect(rasgraph.vertex_raster[rasgraph.vertex_raster .!= 0])) == 
         collect(1:sum(
-            (condition_raster .!= condition_raster.missingval) .& 
-                (!).(isnan.(condition_raster))
+            (raster .!= raster.missingval) .& 
+                (!).(isnan.(raster))
         ))
 
 graph_edges = collect(edges(rasgraph))
@@ -40,8 +40,8 @@ for i in 1:length(graph_edges)
 
     # Check that condition is met
     @test compare(
-        condition_raster[source_coords],
-        condition_raster[dest_coords]
+        raster[source_coords],
+        raster[dest_coords]
     )
 
     # Test that source row is within 1 step of dest row
@@ -53,5 +53,5 @@ for i in 1:length(graph_edges)
     @test col_diff <= 1
 end
 
-@test is_directed(rasgraph)
+@test is_directed(rasgraph) == false
 @test zero(rasgraph).vertex_raster == rasgraph.vertex_raster
