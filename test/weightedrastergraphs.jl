@@ -8,8 +8,11 @@ band = Band(1:1)
 
 weight_raster = GeoArray(A_array, (y, x, band), missingval = -9999)
 weight_raster2d = GeoArray(A_array[:, :, 1], (y, x), missingval = -9999)
-rasgraph2d = weightedrastergraph(weight_raster2d)
-rasgraph = weightedrastergraph(weight_raster)
+rasgraph2d = weightedrastergraph(
+    weight_raster2d,
+    connect_using_avg_weights = false
+)
+rasgraph = weightedrastergraph(weight_raster, connect_using_avg_weights = false)
 
 # Test that graphs are the same regardless of whether weight_raster has Band dim
 @test rasgraph2d.graph == rasgraph.graph
@@ -48,11 +51,11 @@ for i in 1:length(graph_edges)
     # Test that the weight is what it should be (assumes connect_using_avg_weights = true in graph construction)
     if (row_diff == 1 && col_diff == 1) # get diagonal average
         @test weight_i == 
-            SpatialGraphs.res_diagonal_avg(weight_raster[source_coords], 
+            SpatialGraphs.cond_diagonal_avg(weight_raster[source_coords], 
                                            weight_raster[dest_coords])
     else
         @test weight_i == 
-            SpatialGraphs.res_cardinal_avg(weight_raster[source_coords],
+            SpatialGraphs.cond_cardinal_avg(weight_raster[source_coords],
                                            weight_raster[dest_coords])
     end
 end

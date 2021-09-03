@@ -16,7 +16,7 @@ end
     include("weightedrasterdigraphs.jl")
 end
 
-@testset "Checking LightGraphs Interface" begin
+@testset "LightGraphs Interface" begin
     include("lg_interface.jl")
 end
 
