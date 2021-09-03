@@ -68,3 +68,6 @@ for i in 1:length(graph_edges)
                                            weight_raster[dest_coords])
     end
 end
+
+@test is_directed(rasgraph)
+@test zero(rasgraph).vertex_raster == rasgraph.vertex_raster

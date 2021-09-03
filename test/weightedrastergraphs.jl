@@ -56,3 +56,36 @@ for i in 1:length(graph_edges)
                                            weight_raster[dest_coords])
     end
 end
+
+# check that no edges exist that shouldn't
+vertex_raster = rasgraph.vertex_raster
+for src_row in 1:size(vertex_raster)[1]
+    for src_col in 1:size(vertex_raster)[2]
+        for dst_row in 1:size(vertex_raster)[1]
+            for dst_col in 1:size(vertex_raster)[2]
+                if ((vertex_raster[src_row, src_col] == 0) | 
+                        (vertex_raster[dst_row, dst_col] == 0))
+                    continue
+                elseif ((abs(src_row - dst_row) <= 1) &
+                        (abs(src_col - dst_col) <= 1)) & (
+                            (abs(src_row - dst_row) > 0) |
+                            (abs(src_col - dst_col) > 0))
+                    @test has_edge(
+                        rasgraph, 
+                        vertex_raster[src_row, src_col],
+                        vertex_raster[dst_row, dst_col]
+                    ) == true
+                else
+                    @test (has_edge(
+                        rasgraph, 
+                        vertex_raster[src_row, src_col],
+                        vertex_raster[dst_row, dst_col]
+                    ) == false)
+                end
+            end
+        end
+    end
+end
+
+@test is_directed(rasgraph) == false
+@test zero(rasgraph).vertex_raster == rasgraph.vertex_raster
