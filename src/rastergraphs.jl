@@ -396,7 +396,16 @@ function make_raster_graph(
 
     sources = Vector{Int64}()
     destinations = Vector{Int64}()
-    weighted && (node_weights = Vector{Float64}())
+
+    weighted && (weight_type = eltype(raster))
+
+    if weighted && (weight_type <: Integer)
+        @info ("weight_raster eltype is $(weight_type). " *
+               "Promoting to Float64.")
+        weight_type = Float64
+    end
+
+    weighted && (node_weights = Vector{weight_type}())
     
     # Add the edges
     # Only need to do neighbors down or to the right for undirected graphs
