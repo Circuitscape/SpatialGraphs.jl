@@ -1,7 +1,7 @@
 using GeoData, LightGraphs, SimpleWeightedGraphs, SpatialGraphs, Test
 
 condition_array = Array{Float64}(undef, (3, 4, 1))
-condition_array[:,:,:] = [1, 3, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 7]
+condition_array[:,:,:] = [1, 0.5, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 7]
 
 x = X(1:4)
 y = Y(1:3)

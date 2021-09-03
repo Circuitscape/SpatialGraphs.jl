@@ -31,3 +31,4 @@ add_edge!(empty, 1, 4, Float32(0.5))
 
 @test nv(empty) == maximum(rasgraph.vertex_raster)
 @test has_edge(empty, 1, 4)
+@test get_weight(empty, 1, 4) == Float32(0.5)
