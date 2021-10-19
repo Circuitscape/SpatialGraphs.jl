@@ -1,6 +1,6 @@
-## Methods for the LightGraphs ad SimpleWeightedGraphs interfaces
-## With these methods defined, functions from LightGraphs should "just work"
-import LightGraphs: 
+## Methods for the Graphs ad SimpleWeightedGraphs interfaces
+## With these methods defined, functions from Graphs should "just work"
+import Graphs: 
     nv, ne, vertices, edges, eltype, edgetype, has_edge, has_vertex,
     inneighbors, outneighbors, is_directed, add_edge!
 
@@ -9,7 +9,7 @@ import SimpleWeightedGraphs:
 
 import Base: zero
 
-### LightGraphs interface
+### Graphs interface
 nv(g::AbstractSpatialGraph) = nv(g.graph)
 ne(g::AbstractSpatialGraph) = ne(g.graph)
 vertices(g::AbstractSpatialGraph) = vertices(g.graph)
@@ -22,13 +22,13 @@ inneighbors(g::AbstractSpatialGraph, v) = inneighbors(g.graph, v)
 outneighbors(g::AbstractSpatialGraph, v) = outneighbors(g.graph, v)
 is_directed(g::AbstractSpatialGraph) = is_directed(g.graph)
 function Base.zero(g::AbstractRasterGraph)
-    if g.graph isa SimpleGraph
-        SimpleRasterGraph(
+    if g.graph isa Graph
+        RasterGraph(
             zero(typeof(g.graph)),
             g.vertex_raster
         )
-    elseif g.graph isa SimpleDiGraph
-        SimpleRasterDiGraph(
+    elseif g.graph isa DiGraph
+        RasterDiGraph(
             zero(typeof(g.graph)),
             g.vertex_raster
         )

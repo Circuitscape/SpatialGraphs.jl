@@ -42,21 +42,21 @@ mutable struct WeightedRasterDiGraph{T<:Integer, U<:Real} <: AbstractRasterGraph
 end
 
 """
-    SimpleRasterGraph{T}
+    RasterGraph{T}
 
 A composite type for a spatially referenced graph. Vertices are spatially referenced based on a raster.
 """
-mutable struct SimpleRasterGraph{T<:Integer} <: AbstractRasterGraph{T}
-    graph::SimpleGraph{T} # A SimpleGraph
+mutable struct RasterGraph{T<:Integer} <: AbstractRasterGraph{T}
+    graph::Graph{T} # A Graph
     vertex_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
 end
 
 """
-    SimpleRasterDiGraph{T}
+    RasterDiGraph{T}
 
 A composite type for a spatially referenced directed graph. Vertices are spatially referenced based on a raster.
 """
-mutable struct SimpleRasterDiGraph{T<:Integer} <: AbstractRasterGraph{T}
-    graph::SimpleDiGraph{T} # A SimpleDiGraph
+mutable struct RasterDiGraph{T<:Integer} <: AbstractRasterGraph{T}
+    graph::DiGraph{T} # A DiGraph
     vertex_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
 end

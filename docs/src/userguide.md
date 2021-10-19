@@ -7,7 +7,7 @@ data.
 
 ### Simple Graphs
 ```@docs
-simplerastergraph
+rastergraph
 make_simple_raster_graph
 ```
 

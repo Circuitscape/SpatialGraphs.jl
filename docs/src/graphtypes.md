@@ -12,7 +12,7 @@ an `AbstractGraph`.
 AbstractSpatialGraph
 ```
 
-The `AbstractRasterGraph` type is as subtype of `AbstractSpatialGraph`. All
+The `AbstractRasterGraph` type is a subtype of `AbstractSpatialGraph`. All
 `AbstractRasterGraph` subtypes contain a field called `vertex_raster`, which is 
 a `GeoData.GeoArray` that describes the spatial locations for the vertices in 
 the graph. If your graph has 10 vertices, then the corresponding `vertex_raster` 
@@ -30,8 +30,8 @@ SpatialGraphs.jl has raster graph types for undirected, directed, unweighted,
 and weighted graphs, each detailed below.
 
 ```@docs
-SimpleRasterGraph
-SimpleRasterDiGraph
+RasterGraph
+RasterDiGraph
 WeightedRasterGraph
 WeightedRasterDiGraph
 ```

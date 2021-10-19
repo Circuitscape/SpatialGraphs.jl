@@ -1,4 +1,4 @@
-using SpatialGraphs, Test, GeoData, LightGraphs, SimpleWeightedGraphs
+using SpatialGraphs, Test, GeoData, Graphs, SimpleWeightedGraphs
 ## This script tests methods for the LightGraph interface that aren't already 
 ## used in other tests
 

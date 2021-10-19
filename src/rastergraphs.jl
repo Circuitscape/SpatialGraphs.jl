@@ -119,14 +119,14 @@ function weightedrastergraph(
 end
 
 """
-    simplerastergraph(
+    RasterGraph(
         raster::GeoArray;
         directed::Bool = true,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false
     )
 
-Construct a `SimpleRasterGraph` or `SimpleRasterDiGraph` (if 
+Construct a `RasterGraph` or `RasterDiGraph` (if 
 `directed = true`) from a raster dataset.
 
 ## Parameters
@@ -161,7 +161,7 @@ connected. Note that when determining weights between diagonal neighbors, the
 increased distance between them (as compared to the distance between cardinal
 neighbors) is accounted for.
 """
-function simplerastergraph(
+function rastergraph(
         raster::GeoArray;
         condition::Function = is_data,
         directed::Bool = true,
@@ -177,9 +177,9 @@ function simplerastergraph(
     )
 
     if directed
-        sg = SimpleRasterDiGraph(g, v)
+        sg = RasterDiGraph(g, v)
     else
-        sg = SimpleRasterGraph(g, v)
+        sg = RasterGraph(g, v)
     end
 
     return sg
@@ -587,7 +587,7 @@ function make_raster_graph(
             )
         else
             n_nodes = max(maximum(sources), maximum(destinations))
-            g = SimpleDiGraph(
+            g = DiGraph(
                 sparse(sources, destinations, 1, n_nodes, n_nodes, combine)
             )
         end
@@ -601,7 +601,7 @@ function make_raster_graph(
             )
         else
             n_nodes = max(maximum(sources), maximum(destinations))
-            g = SimpleGraph(
+            g = Graph(
                 sparse(
                     vcat(sources, destinations),
                     vcat(destinations, sources),

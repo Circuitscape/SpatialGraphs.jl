@@ -1,7 +1,7 @@
-using GeoData, LightGraphs, SimpleWeightedGraphs, SpatialGraphs, Test
+using GeoData, Graphs, SimpleWeightedGraphs, SpatialGraphs, Test
 
 @testset "Simple Raster Graph Construction" begin
-    include("simplerastergraphs.jl")
+    include("rastergraphs.jl")
 end
 
 @testset "Weighted Raster Graph Construction" begin
@@ -9,14 +9,14 @@ end
 end
 
 @testset "Simple Raster DiGraph Construction" begin
-    include("simplerasterdigraphs.jl")
+    include("rasterdigraphs.jl")
 end
 
 @testset "Weighted Raster DiGraph Construction" begin
     include("weightedrasterdigraphs.jl")
 end
 
-@testset "LightGraphs Interface" begin
+@testset "Graphs Interface" begin
     include("lg_interface.jl")
 end
 
