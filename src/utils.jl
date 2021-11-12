@@ -3,7 +3,7 @@
     is_data(a::Number, b::Number)
 
 This function is the default used for deciding whether to connect two neighbors
-in a GeoArray when constructing a graph. It always returns `true`, so all
+in a Raster when constructing a graph. It always returns `true`, so all
 neighbors will be connected
 
 Returns `true`
@@ -22,7 +22,7 @@ res_cardinal_avg(x, y) = (x + y) / 2
 res_diagonal_avg(x, y) = ((x + y) * √2) / 2
 
 
-# function get_dims(A::GeoData.GeoArray)
+# function get_dims(A::Rasters.Raster)
 #     y_first = dims(mytif)[1] isa XDim
 #     first_dim_type = y_first ? YDim : XDim
 #     second_dim_type = y_first ? XDim : YDim

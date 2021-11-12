@@ -1,17 +1,17 @@
 """
-    make_vertex_raster(A::GeoArray)
+    make_vertex_raster(A::Raster)
 
 Constuct a vertex raster (a raster where the value of each pixel corresponds
-to its ID in a graph, and 0s correspond to NoData). Returns a GeoArray. This 
+to its ID in a graph, and 0s correspond to NoData). Returns a Raster. This 
 function is recommended for internal use only.
 
 ## Parameters
-`A`: The GeoArray from which a graph will be built, which is used as the
+`A`: The Raster from which a graph will be built, which is used as the
 reference for building the vertex raster. Pixels with NoData (`A.missingval`)
 are skipped (no vertex is assigned). Pixels with NoData will get a value of 0 in
 the vertex raster.
 """
-function make_vertex_raster(A::GeoData.GeoArray)
+function make_vertex_raster(A::Raster)
     # Make an array of unique node identifiers
     nodemap = zeros(Int64, size(A.data))
     is_node = (A.data .!= A.missingval) .&
@@ -19,7 +19,7 @@ function make_vertex_raster(A::GeoData.GeoArray)
 
     nodemap[is_node] = 1:sum(is_node)
 
-    nodemap = GeoData.GeoArray(nodemap, dims(A))
+    nodemap = Raster(nodemap, dims(A))
 
     nodemap
 end
@@ -27,9 +27,9 @@ end
 
 """
     weightedrastergraph(
-        weight_raster::GeoArray;
+        weight_raster::Raster;
         directed::Bool = false,
-        condition_raster::GeoArray = weight_raster,
+        condition_raster::Raster = weight_raster,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
         connect_using_avg_weights::Bool = true
@@ -42,7 +42,7 @@ on vertices, edge weights are calculated as the average of the weights for each
 vertex.
 
 ## Parameters
-`weight_raster`: A GeoData.GeoArray contained values that, where applicable 
+`weight_raster`: A Rasters.Raster contained values that, where applicable 
 based on other arguments, determines which pixels to connect and the edge 
 weights between pixels. Any pixel in `weight_raster` with a value not equal to 
 `weight_raster.missingval` will be assigned a vertex in the graph (corresponding
@@ -90,9 +90,9 @@ neighbors) of the weights  in `weight_raster` is used.
 
 """
 function weightedrastergraph(
-        weight_raster::GeoArray;
+        weight_raster::Raster;
         directed::Bool = false,
-        condition_raster::GeoArray = weight_raster,
+        condition_raster::Raster = weight_raster,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
         connect_using_avg_weights::Bool = true
@@ -119,18 +119,18 @@ function weightedrastergraph(
 end
 
 """
-    simplerastergraph(
-        raster::GeoArray;
+    RasterGraph(
+        raster::Raster;
         directed::Bool = true,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false
     )
 
-Construct a `SimpleRasterGraph` or `SimpleRasterDiGraph` (if 
+Construct a `RasterGraph` or `RasterDiGraph` (if 
 `directed = true`) from a raster dataset.
 
 ## Parameters
-`raster`: A GeoData.GeoArray on which to base the graph. Any pixel in `raster` 
+`raster`: A Rasters.Raster on which to base the graph. Any pixel in `raster` 
 with a value not equal to `raster.missingval` will be assigned a vertex
 in the graph (corresponding to its centroid). The values in the raster can also
 be used to determine which vertices to connect. See `condition` below for more
@@ -161,8 +161,8 @@ connected. Note that when determining weights between diagonal neighbors, the
 increased distance between them (as compared to the distance between cardinal
 neighbors) is accounted for.
 """
-function simplerastergraph(
-        raster::GeoArray;
+function rastergraph(
+        raster::Raster;
         condition::Function = is_data,
         directed::Bool = true,
         cardinal_neighbors_only::Bool = false,
@@ -177,9 +177,9 @@ function simplerastergraph(
     )
 
     if directed
-        sg = SimpleRasterDiGraph(g, v)
+        sg = RasterDiGraph(g, v)
     else
-        sg = SimpleRasterGraph(g, v)
+        sg = RasterGraph(g, v)
     end
 
     return sg
@@ -187,10 +187,10 @@ end
 
 """
     make_weighted_raster_graph(
-        weight_raster::GeoArray,
-        vertex_raster::GeoArray;
+        weight_raster::Raster,
+        vertex_raster::Raster;
         directed::Bool = false,
-        condition_raster::GeoArray = weight_raster,
+        condition_raster::Raster = weight_raster,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
         connect_using_avg_weights::Bool = true,
@@ -206,13 +206,13 @@ vertex. Since edges are between rather than on vertices, edge weights are
 calculated as the average of the weights for each vertex being connected.
 
 ## Parameters
-`weight_raster`: A `GeoData.GeoArray` containing values that, where applicable 
+`weight_raster`: A `Rasters.Raster` containing values that, where applicable 
 based on other arguments, determine which pixels to connect and the edge 
 weights between pixels. Any pixel in `weight_raster` with a value not equal to 
 `weight_raster.missingval` will be assigned a vertex in the graph (corresponding
 to its centroid). 
 
-`vertex_raster`: A `GeoData.GeoArray` with integer values ranging from 1:n, 
+`vertex_raster`: A `Rasters.Raster` with integer values ranging from 1:n, 
 where n is the number of unique vertices in the graph. 
 
 ## Arguments
@@ -256,10 +256,10 @@ of vertices, how should the weight be chosen? Defaults to `min`. See the docs
 for `SparseArrays.sparse()` for more information.
 """
 function make_weighted_raster_graph(
-        weight_raster::GeoArray,
-        vertex_raster::GeoArray;
+        weight_raster::Raster,
+        vertex_raster::Raster;
         directed::Bool = false,
-        condition_raster::GeoArray = weight_raster,
+        condition_raster::Raster = weight_raster,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
         connect_using_avg_weights::Bool = true,
@@ -289,8 +289,8 @@ end
 
 """
     make_simple_raster_graph(
-        raster::GeoArray,
-        vertex_raster::GeoArray;
+        raster::Raster,
+        vertex_raster::Raster;
         directed::Bool = false,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
@@ -305,13 +305,13 @@ in the graph, and `raster` is used to construct the graph and determine which
 vertices to connect.
 
 ## Parameters
-`raster`: A GeoData.GeoArray on which to base the graph. Any pixel in `raster` 
+`raster`: A Rasters.Raster on which to base the graph. Any pixel in `raster` 
 with a value not equal to `raster.missingval` will be assigned a vertex
 in the graph (corresponding to its centroid). The values in the raster can also
 be used to determine which vertices to connect. See `condition` below for more
 information.
 
-`vertex_raster`: A `GeoData.GeoArray` with integer values ranging from 1:n, 
+`vertex_raster`: A `Rasters.Raster` with integer values ranging from 1:n, 
 where n is the number of unique vertices in the graph. 
 
 ## Arguments
@@ -355,8 +355,8 @@ of vertices, how should the weight be chosen? Defaults to `min`. See the docs
 for `SparseArrays.sparse()` for more information.
 """
 function make_simple_raster_graph(
-        raster::GeoArray,
-        vertex_raster::GeoArray;
+        raster::Raster,
+        vertex_raster::Raster;
         directed::Bool = false,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
@@ -378,11 +378,11 @@ end
 
 
 function make_raster_graph(
-        raster::GeoArray,
-        vertex_raster::GeoArray;
+        raster::Raster,
+        vertex_raster::Raster;
         directed::Bool = false,
         weighted::Bool = true,
-        condition_raster::GeoArray = raster,
+        condition_raster::Raster = raster,
         condition::Function = is_data,
         cardinal_neighbors_only::Bool = false,
         connect_using_avg_weights::Bool = true,
@@ -410,7 +410,7 @@ function make_raster_graph(
     # Add the edges
     # Only need to do neighbors down or to the right for undirected graphs
     # because edge additions will be redundant.
-    # Cardinal directions are in quotes since sometimes GeoArray are permuted
+    # Cardinal directions are in quotes since sometimes Raster are permuted
     # such that the top row doesn't necessarily correspond to the northern-most
     # pixels
     for row in 1:dims[1]
@@ -587,7 +587,7 @@ function make_raster_graph(
             )
         else
             n_nodes = max(maximum(sources), maximum(destinations))
-            g = SimpleDiGraph(
+            g = DiGraph(
                 sparse(sources, destinations, 1, n_nodes, n_nodes, combine)
             )
         end
@@ -601,7 +601,7 @@ function make_raster_graph(
             )
         else
             n_nodes = max(maximum(sources), maximum(destinations))
-            g = SimpleGraph(
+            g = Graph(
                 sparse(
                     vcat(sources, destinations),
                     vcat(destinations, sources),

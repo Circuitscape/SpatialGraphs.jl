@@ -1,7 +1,7 @@
-using GeoData, LightGraphs, SimpleWeightedGraphs, SpatialGraphs, Test
+using Rasters, Graphs, SimpleWeightedGraphs, SpatialGraphs, Test
 
 @testset "Simple Raster Graph Construction" begin
-    include("simplerastergraphs.jl")
+    include("rastergraphs.jl")
 end
 
 @testset "Weighted Raster Graph Construction" begin
@@ -9,15 +9,15 @@ end
 end
 
 @testset "Simple Raster DiGraph Construction" begin
-    include("simplerasterdigraphs.jl")
+    include("rasterdigraphs.jl")
 end
 
 @testset "Weighted Raster DiGraph Construction" begin
     include("weightedrasterdigraphs.jl")
 end
 
-@testset "LightGraphs Interface" begin
-    include("lg_interface.jl")
+@testset "Graphs Interface" begin
+    include("graph_interface.jl")
 end
 
 printstyled("Checking that Base.show works...\n", bold = true)
@@ -28,7 +28,7 @@ x = X(1:4)
 y = Y(1:3)
 band = Band(1:1)
 
-weight_raster = GeoArray(A_array, (y, x, band), missingval = -9999)
+weight_raster = Raster(A_array, (y, x, band), missingval = -9999)
 rasgraph = weightedrastergraph(weight_raster)
 show(rasgraph);print("\n")
 

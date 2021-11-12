@@ -18,7 +18,7 @@ An abstract type representing a spatially referenced graph, with graph vertices 
 An AbstractRasterGraph must contain the following fields:
 
 - `graph::AbstractGraph`
-- `vertex_raster::GeoArray`
+- `vertex_raster::Raster`
 """
 abstract type AbstractRasterGraph{T} <: AbstractSpatialGraph{T} end
 
@@ -29,7 +29,7 @@ A composite type for a spatially referenced weighted graph. Vertices are spatial
 """
 mutable struct WeightedRasterGraph{T<:Integer, U<:Real} <: AbstractRasterGraph{T}
     graph::SimpleWeightedGraph{T, U} # a SimpleWeightedGraph with edge weights
-    vertex_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
+    vertex_raster::Raster # A Raster raster, where a pixel's value denotes its vertex ID in the graph
 end
 """
     WeightedRasterDiGraph{T}
@@ -38,25 +38,25 @@ A composite type for a spatially referenced, weighted, directed graph. Vertices 
 """
 mutable struct WeightedRasterDiGraph{T<:Integer, U<:Real} <: AbstractRasterGraph{T}
     graph::SimpleWeightedDiGraph{T, U} # a SimpleWeightedDiGraph with edge weights
-    vertex_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
+    vertex_raster::Raster # A Raster raster, where a pixel's value denotes its vertex ID in the graph
 end
 
 """
-    SimpleRasterGraph{T}
+    RasterGraph{T}
 
 A composite type for a spatially referenced graph. Vertices are spatially referenced based on a raster.
 """
-mutable struct SimpleRasterGraph{T<:Integer} <: AbstractRasterGraph{T}
-    graph::SimpleGraph{T} # A SimpleGraph
-    vertex_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
+mutable struct RasterGraph{T<:Integer} <: AbstractRasterGraph{T}
+    graph::Graph{T} # A Graph
+    vertex_raster::Raster # A Raster raster, where a pixel's value denotes its vertex ID in the graph
 end
 
 """
-    SimpleRasterDiGraph{T}
+    RasterDiGraph{T}
 
 A composite type for a spatially referenced directed graph. Vertices are spatially referenced based on a raster.
 """
-mutable struct SimpleRasterDiGraph{T<:Integer} <: AbstractRasterGraph{T}
-    graph::SimpleDiGraph{T} # A SimpleDiGraph
-    vertex_raster::GeoArray # A GeoArray raster, where a pixel's value denotes its vertex ID in the graph
+mutable struct RasterDiGraph{T<:Integer} <: AbstractRasterGraph{T}
+    graph::DiGraph{T} # A DiGraph
+    vertex_raster::Raster # A Raster raster, where a pixel's value denotes its vertex ID in the graph
 end

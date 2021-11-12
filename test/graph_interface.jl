@@ -1,4 +1,4 @@
-using SpatialGraphs, Test, GeoData, LightGraphs, SimpleWeightedGraphs
+using SpatialGraphs, Test, Rasters, Graphs, SimpleWeightedGraphs
 ## This script tests methods for the LightGraph interface that aren't already 
 ## used in other tests
 
@@ -8,7 +8,7 @@ x = X(1:4)
 y = Y(1:3)
 band = Band(1:1)
 
-weight_raster = GeoArray(A_array, (y, x, band), missingval = -9999)
+weight_raster = Raster(A_array, (y, x, band), missingval = -9999)
 rasgraph = weightedrastergraph(weight_raster)
 
 @test nv(rasgraph) == maximum(rasgraph.vertex_raster)

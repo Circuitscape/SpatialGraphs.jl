@@ -12,8 +12,8 @@ function show(io::IO, g::AbstractRasterGraph)
     )
     printstyled(" with dimensions:\n", color=:light_black)
 
-    x_dim = dims(g.vertex_raster, XDim)
-    y_dim = dims(g.vertex_raster, YDim)
+    x_dim = dims(g.vertex_raster, X)
+    y_dim = dims(g.vertex_raster, Y)
     printstyled("    X", color=:cyan)
     print(
         ": range($(minimum(x_dim)), $(maximum(x_dim)), step=$(x_dim.val[2] - x_dim.val[1]))\n"
