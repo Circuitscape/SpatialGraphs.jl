@@ -1,4 +1,4 @@
-using GeoData, Graphs, SimpleWeightedGraphs, SpatialGraphs, Test
+using Rasters, Graphs, SimpleWeightedGraphs, SpatialGraphs, Test
 
 array = Array{Int}(undef, (3, 4, 1))
 array[:,:,:] = [1, 1, 1, 1, 2, 2, 2, -9999, 2, 3, 3, 3]
@@ -7,7 +7,7 @@ x = X(1:4)
 y = Y(1:3)
 band = Band(1:1)
 
-raster = GeoArray(array, (y, x, band), missingval = -9999)
+raster = Raster(array, (y, x, band), missingval = -9999)
 
 compare = ==
 rasgraph = rastergraph(

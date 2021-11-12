@@ -1,6 +1,6 @@
 module SpatialGraphs
 
-using Graphs, SimpleWeightedGraphs, SparseArrays, GeoData
+using Graphs, SimpleWeightedGraphs, SparseArrays, Rasters
 
 include("structs.jl")
 include("graph_interface.jl")

@@ -12,5 +12,5 @@ out of the box.
 `AbstractSpatialGraph`s themselves contain an `AbstractGraph` in addition to 
 metadata that details the spatial location of each vertex in the
 graph. At this time, only raster-based graph types have been developed (and 
-vertex locations are stored in a `GeoData.GeoArray`), but there are plans to 
+vertex locations are stored in a `Rasters.Raster`), but there are plans to 
 implement graph types for vector data as well.

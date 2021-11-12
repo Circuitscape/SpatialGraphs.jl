@@ -1,7 +1,7 @@
 # [Graph Types in SpatialGraphs.jl](@id graph_types)
 
 At this time, only raster-based graph types have been developed (and 
-vertex locations are stored in a `GeoData.GeoArray`), but there are plans to 
+vertex locations are stored in a `Rasters.Raster`), but there are plans to 
 eventually implement graph types for vector data as well.
 
 ## Abstract Types
@@ -14,7 +14,7 @@ AbstractSpatialGraph
 
 The `AbstractRasterGraph` type is a subtype of `AbstractSpatialGraph`. All
 `AbstractRasterGraph` subtypes contain a field called `vertex_raster`, which is 
-a `GeoData.GeoArray` that describes the spatial locations for the vertices in 
+a `Rasters.Raster` that describes the spatial locations for the vertices in 
 the graph. If your graph has 10 vertices, then the corresponding `vertex_raster` 
 must have 10 unique values, starting at 1 (which corresponds to the first vertex
 in the graph) and going up to 10 (which corresponds to the tenth vertex in the 
