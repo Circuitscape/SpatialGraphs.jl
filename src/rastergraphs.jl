@@ -83,7 +83,7 @@ weights (the values in `weight_raster`) are in units of electrical resistance.
 If `false`, the weight between two nodes with resistances R1 and R2 is 
 calculated by converting resistance to conductances, taking the average, then 
 taking the inverse of the result to convert back to resistance: 
-`1 / ((1/R1 + 1/R2) / 2)`. `connect_using_avg_weights = false` correspondes to 
+`1 / ((1/R1 + 1/R2) / 2)`. `connect_using_avg_weights = false` corresponds to 
 the default settings in Circuitscape. Defaults to `true`, in which case the 
 simple average (adjusted for distance in the case of diagonal 
 neighbors) of the weights  in `weight_raster` is used.
@@ -115,7 +115,6 @@ function weightedrastergraph(
     end
 
     return sg
-
 end
 
 """
