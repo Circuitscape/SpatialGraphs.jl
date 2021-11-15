@@ -19,7 +19,7 @@ function make_vertex_raster(A::Raster)
 
     nodemap[is_node] = 1:sum(is_node)
 
-    nodemap = Raster(nodemap, dims(A))
+    nodemap = Raster(nodemap, dims(A), missingval = 0)
 
     nodemap
 end
