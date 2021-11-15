@@ -2,7 +2,7 @@
 ## With these methods defined, functions from Graphs should "just work"
 import Graphs: 
     nv, ne, vertices, edges, eltype, edgetype, has_edge, has_vertex,
-    inneighbors, outneighbors, is_directed, add_edge!
+    inneighbors, outneighbors, is_directed, add_edge!, weights
 
 import SimpleWeightedGraphs:
     add_edge!, get_weight, add_vertex!, vertices
@@ -21,6 +21,8 @@ has_vertex(g::AbstractSpatialGraph, v) = has_vertex(g.graph, v)
 inneighbors(g::AbstractSpatialGraph, v) = inneighbors(g.graph, v)
 outneighbors(g::AbstractSpatialGraph, v) = outneighbors(g.graph, v)
 is_directed(g::AbstractSpatialGraph) = is_directed(g.graph)
+weights(g::AbstractSpatialGraph) = weights(g.graph)
+
 function Base.zero(g::AbstractRasterGraph)
     if g.graph isa Graph
         RasterGraph(

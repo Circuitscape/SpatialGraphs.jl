@@ -1,4 +1,4 @@
-using SpatialGraphs, Test, Rasters, Graphs, SimpleWeightedGraphs
+using SpatialGraphs, Test, Rasters, Graphs, SimpleWeightedGraphs, SparseArrays
 ## This script tests methods for the LightGraph interface that aren't already 
 ## used in other tests
 
@@ -16,6 +16,7 @@ num_edge = ne(rasgraph)
 @test vertices(rasgraph) == 1:maximum(rasgraph.vertex_raster)
 @test eltype(rasgraph) == Int # Should always be Int64 (or int32 on 32-bit)
 @test edgetype(rasgraph) == SimpleWeightedEdge{eltype(rasgraph), eltype(A_array)}
+@test typeof(weights(rasgraph)) <: SparseMatrixCSC # Make sure it's returning proper weights from the weighted graph
 
 for i in 1:maximum(rasgraph.vertex_raster)
     @test has_vertex(rasgraph, i)
