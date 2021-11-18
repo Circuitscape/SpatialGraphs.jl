@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48.908115mm"
+   height="41.329723mm"
+   viewBox="0 0 48.908116 41.329723"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (eb90963e84, 2021-10-02)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="5.0601537"
+     inkscape:cx="65.610655"
+     inkscape:cy="73.811987"
+     inkscape:window-width="2560"
+     inkscape:window-height="1320"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="fill_between_many"
+       method="originald"
+       linkedpaths="#path5287,0,1|#path3770,0,1|#path3115-9,0,1|#path3115-9-0,0,1|#path5285,0,1"
+       id="path-effect5600"
+       is_visible="true"
+       lpeversion="0"
+       join="true"
+       close="true"
+       autoreverse="true"
+       applied="false" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-43.694471,-68.884168)">
+    <path
+       style="fill:#9ec358;fill-opacity:1;stroke:none;stroke-width:0.289341px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 53.792141,105.25115 c -0.169554,2.9399 2.774291,5.79383 5.594715,4.09022 0.847366,-0.51183 0.598533,-1.87413 1.689019,-2.31849 1.844999,-0.75182 4.323754,0.0965 5.62549,-1.83666 1.650792,-2.45156 0.898133,-8.630033 -3.009375,-8.611799 -2.047334,0.0095 -3.594524,1.77428 -5.608888,1.703608 -0.677109,-0.02375 -1.478571,-0.164159 -2.067237,-0.527021 -0.398732,-0.245781 -0.450666,-0.714015 -0.814022,-0.985781 -1.022037,-0.764415 -2.52617,-0.632729 -3.301045,0.391011 -1.98822,2.626761 1.191528,2.904422 1.843329,3.938932 0.200322,0.31793 0.468047,1.014 0.418076,1.40333 -0.06065,0.47243 -0.464736,0.85393 -0.54432,1.33669 -0.08409,0.51012 0.272139,0.96314 0.174258,1.41596 z"
+       id="path25882"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:#9ec358;fill-opacity:1;stroke:none;stroke-width:0.355375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 74.776761,69.771239 c -2.163654,-0.717276 -4.082817,-0.182984 -4.488253,2.24964 -0.161386,0.968317 0.805207,1.63815 0.6329,2.689881 -0.310405,1.894677 -5.926909,6.635559 -0.02684,7.183312 0.733273,0.06809 1.584858,0.597624 2.200758,0.193902 1.60584,-1.052623 1.833224,-2.615117 4.11487,-2.873297 2.106915,-0.238411 5.781342,0.762795 6.994201,-1.520584 2.69899,-5.081232 -2.542015,-4.752187 -4.683032,-6.168708 -1.322885,-0.875238 -1.759509,-2.1814 -3.459736,-2.606467 -0.955169,-0.238802 -0.987462,0.829325 -1.733411,0.887002"
+       id="path27042"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:none;stroke:#656565;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 75.846213,75.08527 60.308685,102.04664"
+       id="path13144"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:#9ec358;fill-opacity:1;stroke:none;stroke-width:0.341167px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 88.745439,97.023279 c -0.768501,1.874673 -1.454005,1.94977 -3.287334,1.400418 -5.931635,-1.777412 -12.030968,6.268503 -8.923677,9.819693 1.16262,1.3287 5.219459,-0.54022 6.898456,0.35821 1.691706,0.90524 6.114453,2.63025 7.729878,0.81292 2.406083,-2.70682 -0.100172,-4.95405 0.0692,-7.79418 0.125362,-2.102047 3.005725,-4.933692 0.02238,-5.182304 -1.091245,-0.09093 -1.637358,-0.119987 -2.508899,0.585243 z"
+       id="path26314"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:none;stroke:#656565;stroke-width:0.465;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 76.24714,74.902025 9.383246,29.169065"
+       id="path13672"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:#9ec358;fill-opacity:1;stroke:none;stroke-width:0.214654px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 45.700243,78.919139 c -0.365806,0.394072 -0.716714,0.715315 -0.682902,1.303172 0.0377,0.655388 1.025115,1.886274 0.70935,2.479486 -0.334529,0.628462 -2.14855,1.192837 -2.026321,1.906638 0.121559,0.709864 1.879335,2.054444 2.324539,2.452306 0.635707,0.568111 1.250875,1.441657 2.122282,1.66679 1.762149,0.455273 3.857191,-0.741051 4.62336,-2.300109 0.671903,-1.36724 0.603627,-3.13065 1.047345,-4.568471 0.389172,-1.261073 2.161757,-1.307935 2.53777,-2.967365 0.617791,-2.726464 -3.801576,-5.004952 -5.660294,-3.14065 -0.64679,0.648721 -1.012802,1.662944 -1.796995,2.164802 -1.181764,0.756284 -2.135743,-0.07123 -3.198129,1.003405 z"
+       id="path26891"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:none;stroke:#656565;stroke-width:0.665;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 76.129419,74.564771 49.754176,81.99303"
+       id="path13670"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <circle
+       style="fill:#389826;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7962"
+       cx="75.763489"
+       cy="75.002449"
+       r="2.3499994"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:none;stroke:#656565;stroke-width:1.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 49.869095,82.433135 9.987981,19.697275"
+       id="path13142"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:none;stroke:#656565;stroke-width:0.565;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 50.281971,82.297228 86.211335,104.55192"
+       id="path13148"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <circle
+       style="fill:#4063d8;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7962-1"
+       cx="49.753052"
+       cy="82.036232"
+       r="2.3499994"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <path
+       style="fill:none;stroke:#656565;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 60.063578,102.54438 25.566808,1.52671"
+       id="path13146"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <circle
+       style="fill:#9558b2;fill-opacity:1;stroke:#9558b2;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7962-7"
+       cx="59.978043"
+       cy="102.31364"
+       r="2.3499994"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+    <circle
+       style="fill:#cb3c33;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7962-71"
+       cx="85.293961"
+       cy="103.86893"
+       r="2.3499994"
+       inkscape:export-filename="/home/vincent/repos/SpatialGraphs.jl/docs/src/assets/logo.png"
+       inkscape:export-xdpi="250"
+       inkscape:export-ydpi="250" />
+  </g>
+</svg>

@@ -2,9 +2,6 @@ using Documenter, SpatialGraphs
 
 const formats = Any[
     Documenter.HTML(
-    	assets = [
-    		"assets/custom.css"
-    	],
 	    edit_link = :commit,
     ),
 ]
