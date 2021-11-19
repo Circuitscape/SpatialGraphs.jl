@@ -327,7 +327,7 @@ here include `<`, `<=`, `==`, etc. The first argument to `condition` corresponds
 to the source vertex, and the second argument corresponds to the destination 
 vertex. So, if you only want to connect sources to destinations with a lower
 value in `raster` (e.g. in the case of developing a hydrologic flow 
-graph based on elevation), then you would use `<` for `condition`. Defaults to 
+graph based on elevation), then you would use `>` for `condition`. Defaults to 
 `is_data`, which results in neighbors being connected as long as they are not 
 NoData in `raster` (`raster.missingval`). Note that if using
 an inequality function (or any function where the result depends on argument 

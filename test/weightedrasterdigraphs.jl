@@ -3,7 +3,7 @@ A_array = Array{Float64}(undef, (3, 4, 1))
 A_array[:,:,:] = [1, 3, 2, 0.5, 10, 8, 5, -9999, 3, 1, 2, 6]
 
 condition_array = Array{Float64}(undef, (3, 4, 1))
-condition_array[:,:,:] = [1, 0.5, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 7]
+condition_array[:,:,:] = [1, 0.5, 5, 2, 4, 8, 5, -9999, 2, 3, 6, 6]
 
 x = X(1:4)
 y = Y(1:3)
@@ -33,6 +33,8 @@ rasgraph = weightedrastergraph(
         ))
 
 graph_edges = collect(edges(rasgraph))
+
+@test length(graph_edges) == 20 # Hard coded based on A_array and condition_array above...
 
 # Test that the edges are correct and have proper weights
 for i in 1:length(graph_edges)

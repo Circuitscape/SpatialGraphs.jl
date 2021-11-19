@@ -31,6 +31,8 @@ rasgraph = weightedrastergraph(weight_raster, connect_using_avg_weights = false)
 
 graph_edges = collect(edges(rasgraph))
 
+@test length(graph_edges) == 21 # hard coded based on A_array as defined above
+
 # Test that the edges are correct and have proper weights
 for i in 1:length(graph_edges)
     source_i = src(graph_edges[i])
