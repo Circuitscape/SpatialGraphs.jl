@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Examples · SpatialGraphs.jl</title><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.039/juliamono-regular.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../"><img class="docs-light-only" src="../assets/logo.svg" alt="SpatialGraphs.jl logo"/><img class="docs-dark-only" src="../assets/logo-dark.svg" alt="SpatialGraphs.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href="../">SpatialGraphs.jl</a></span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">About</a></li><li><a class="tocitem" href="../graphtypes/">Graph Types</a></li><li><a class="tocitem" href="../userguide/">User Guide</a></li><li class="is-active"><a class="tocitem" href>Examples</a><ul class="internal"><li><a class="tocitem" href="#Habitat-Corridor-Mapping"><span>Habitat Corridor Mapping</span></a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Examples</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Examples</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/Circuitscape/SpatialGraphs.jl/blob/10b9ec10ad7deedba4ecf8347d590fb9e136ca69/docs/src/examples.md" title="View on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">View on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Examples"><a class="docs-heading-anchor" href="#Examples">Examples</a><a id="Examples-1"></a><a class="docs-heading-anchor-permalink" href="#Examples" title="Permalink"></a></h1><h2 id="Habitat-Corridor-Mapping"><a class="docs-heading-anchor" href="#Habitat-Corridor-Mapping">Habitat Corridor Mapping</a><a id="Habitat-Corridor-Mapping-1"></a><a class="docs-heading-anchor-permalink" href="#Habitat-Corridor-Mapping" title="Permalink"></a></h2><p>First, install the necessary packages and import them:</p><pre><code class="language-julia hljs">using Pkg
+Pkg.add([&quot;Rasters&quot;, &quot;Plots&quot;, &quot;Graphs&quot;, &quot;SimpleWeightedGraphs&quot;, &quot;SpatialGraphs&quot;])
+using SpatialGraphs, Rasters, Plots, Graphs, SimpleWeightedGraphs</code></pre><p>Now, let&#39;s download the land cover map that we&#39;ll use as the basis for defining the weights of our graph, and plot it. Graph weights correspond to the cost of  an animal moving from one graph vertex to another. This is also commonly refered to as resistance in the context of connectivity modeling.</p><pre><code class="language-julia hljs">url_base = &quot;https://raw.githubusercontent.com/Circuitscape/datasets/main/&quot;
+download(string(url_base, &quot;nlcd_2016_frederick_md.tif&quot;),
+         &quot;nlcd_2016_frederick_md.tif&quot;)
+values = [11, 21, 22, 23, 24, 31, 41, 42, 43, 52, 71, 81, 82, 90, 95]
+palette = [&quot;#476BA0&quot;, &quot;#DDC9C9&quot;, &quot;#D89382&quot;, &quot;#ED0000&quot;, &quot;#AA0000&quot;,
+           &quot;#b2b2b2&quot;, &quot;#68AA63&quot;, &quot;#1C6330&quot;, &quot;#B5C98E&quot;, &quot;#CCBA7C&quot;,
+           &quot;#E2E2C1&quot;, &quot;#DBD83D&quot;, &quot;#AA7028&quot;, &quot;#BAD8EA&quot;, &quot;#70A3BA&quot;]
+
+plot(Raster(&quot;nlcd_2016_frederick_md.tif&quot;), title = &quot;Land Cover Type&quot;, 
+     xlabel = &quot;Easting&quot;, ylabel = &quot;Northing&quot;, 
+     seriescolor = cgrad(palette, (values .- 12) ./ 84,
+     categorical = true), size = (700, 640))</code></pre><img src='../figs/mdlc.png' width=500><br><p>Load the land cover data as a Raster, convert it to Float64, and read it into memory.</p><pre><code class="language-julia hljs">landcover = convert.(
+    Float64,
+    read(
+        Raster(
+            &quot;nlcd_2016_frederick_md.tif&quot;,
+            missingval = -9999.0
+        )
+    )
+)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">725×694×1 Raster{Float64,3} with dimensions: 
+  X Projected range(1.56369e6, stop=1.58541e6, length=725) ForwardOrdered Regular Intervals crs: WellKnownText,
+  Y Projected range(1.98663e6, stop=1.96584e6, length=694) ReverseOrdered Regular Intervals crs: WellKnownText,
+  Band Categorical 1:1 ForwardOrdered
+with missingval: [:, :, 1]
+ 82.0  82.0  82.0  82.0  82.0  41.0  …  81.0  81.0  81.0  82.0  82.0  81.0
+ 82.0  82.0  82.0  82.0  82.0  41.0     82.0  82.0  82.0  82.0  81.0  81.0
+ 82.0  82.0  82.0  82.0  41.0  41.0     82.0  82.0  82.0  82.0  81.0  43.0
+ 82.0  82.0  82.0  82.0  82.0  41.0     82.0  82.0  82.0  82.0  82.0  81.0
+ 82.0  82.0  82.0  82.0  82.0  41.0     82.0  82.0  82.0  82.0  82.0  81.0
+ 82.0  82.0  82.0  82.0  82.0  41.0  …  82.0  82.0  82.0  82.0  82.0  81.0
+  ⋮                             ⋮    ⋱               ⋮                
+ 43.0  43.0  43.0  43.0  43.0  81.0     82.0  22.0  21.0  81.0  81.0  43.0
+ 43.0  43.0  43.0  43.0  43.0  43.0  …  82.0  82.0  22.0  21.0  81.0  81.0
+ 43.0  43.0  43.0  43.0  43.0  43.0     82.0  82.0  22.0  22.0  21.0  43.0
+ 43.0  43.0  43.0  43.0  43.0  43.0     22.0  82.0  82.0  82.0  22.0  21.0
+ 43.0  43.0  43.0  43.0  43.0  81.0     82.0  82.0  82.0  82.0  82.0  22.0
+ 43.0  43.0  43.0  43.0  81.0  81.0     82.0  82.0  82.0  82.0  82.0  82.0</code></pre><p>Now, we need to convert land cover into resistance by reclassifying the values in the land cover raster to their corresponding costs/weights.</p><pre><code class="language-julia hljs"># Copy the landcover object to use as a place holder for resistance
+resistance = deepcopy(landcover)
+
+# Define how values should be reclassified. Original values are on the left,
+# and new values are on the right.
+reclass_table = [
+    11.	100; # Water
+    21	500; # Developed, open space
+    22	1000; # Developed, low intensity
+    23	-9999; # Developed, medium intensity
+    24	-9999; # Developed, high intensity
+    31	100; # Barren land
+    41	1; # Deciduous forest
+    42	1; # Evergreen forest
+    43	1; # Mixed forest
+    52	20; # Shrub/scrub
+    71	30; # Grassland/herbaceous
+    81	200; # Pasture/hay
+    82	300; # Cultivated crops
+    90	20; # Woody wetlands
+    95	30; # Emergent herbaceous wetlands
+]
+
+# Redefine the values in resistance based on the corresponding land cover
+# values, using reclass_table
+for i in 1:(size(reclass_table)[1])
+    resistance[landcover .== reclass_table[i, 1]] .= reclass_table[i, 2]
+end</code></pre><p>Now that we have a resistance raster, we can start using SpatialGraphs.jl!</p><p>Convert the resistance raster into a <code>WeightedRasterGraph</code>:</p><pre><code class="language-julia hljs">wrg = weightedrastergraph(resistance)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">WeightedRasterGraph{Int64, Float64}:
+  graph: SimpleWeightedGraphs.SimpleWeightedGraph{Int64, Float64} with 472395 vertices and 1842168 edges
+  vertex_raster: Raster{Int64, 3} with dimensions:
+    X: range(1.56369e6, 1.58541e6, step=30.0)
+    Y: range(1.96584e6, 1.98663e6, step=-30.0)
+    Band: 1:1</code></pre><p>Now that we have a <code>WeightedRasterGraph</code>, we can make use of the functions in Graphs.jl.</p><p>Let&#39;s calculate cost distances from two different vertices. Vertex IDs,  the second argument to <code>dijkstra_shortest_paths</code>, correspond to the values in  wrg.vertex_raster.</p><p>First, we&#39;ll use <code>dijkstra_shortest_paths</code> to calculate to total cost distance from each vertex of interest to all other vertices in the graph</p><pre><code class="language-julia hljs">cd_1 = dijkstra_shortest_paths(wrg, 1)
+cd_2 = dijkstra_shortest_paths(wrg, 348021)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">Graphs.DijkstraState{Float64, Int64}([718, 718, 719, 5, 6, 723, 723, 724, 8, 11  …  471667, 471669, 471669, 471670, 471671, 472390, 471673, 471675, 471675, 471676], [25701.62603007754, 25577.361961365612, 25515.02282022846, 25278.70510711612, 24978.70510711612, 24678.70510711612, 24566.365965978966, 24466.451752416593, 24566.951752416593, 24565.709111729473  …  10062.751906195092, 10065.272900944012, 9982.430188469392, 9978.87679787612, 9917.037656738969, 10017.537656738969, 10003.812439463301, 9929.048370751374, 10013.362945802135, 9601.023804664985], [Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[]  …  Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[], Int64[]], [4.0298935876110776e136, 1.3432978625370258e136, 1.3432978625370258e136, 1.4160598300911148e137, 1.4160598300911148e137, 1.4160598300911148e137, 1.4160598300911148e137, 8.496358980546688e136, 8.496358980546688e136, 7.365264750938306e135  …  1.7619493254311218e33, 1.006828185960641e33, 2.5170704649016025e32, 2.5170704649016025e32, 2.5170704649016025e32, 2.5170704649016025e32, 3.020484557881923e33, 1.006828185960641e33, 1.006828185960641e33, 1.006828185960641e33], Int64[])</code></pre><p>Now, create placeholder rasters to store the cost distance values for each  vertex, and populate them using the cost distances calculated above. Finally, we&#39;ll sum the </p><pre><code class="language-julia hljs"># Create rasters
+cd_1_raster = Raster( # Start with an empty raster that will be populated
+    fill(float(resistance.missingval), size(wrg.vertex_raster)),
+    dims(resistance),
+    missingval=resistance.missingval
+)
+cd_2_raster = Raster(
+    fill(float(wrg.vertex_raster.missingval), size(wrg.vertex_raster)),
+    dims(resistance),
+    missingval=resistance.missingval
+)
+
+# Populate with cost distances
+cd_1_raster[wrg.vertex_raster .!= wrg.vertex_raster.missingval] .= cd_1.dists[
+    wrg.vertex_raster[wrg.vertex_raster.!= wrg.vertex_raster.missingval]
+]
+cd_2_raster[wrg.vertex_raster .!= wrg.vertex_raster.missingval] .= cd_2.dists[
+    wrg.vertex_raster[wrg.vertex_raster.!= wrg.vertex_raster.missingval]
+]
+
+# Sum the rasters to enalbe corridor mapping
+cwd_sum = cd_1_raster + cd_2_raster</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">725×694×1 Raster{Float64,3} with dimensions: 
+  X Projected range(1.56369e6, stop=1.58541e6, length=725) ForwardOrdered Regular Intervals crs: WellKnownText,
+  Y Projected range(1.98663e6, stop=1.96584e6, length=694) ReverseOrdered Regular Intervals crs: WellKnownText,
+  Band Categorical 1:1 ForwardOrdered
+with missingval: [:, :, 1]
+ 25701.6  25701.6  25701.6  25814.9  …  73534.8  74034.8  74634.8  75134.8
+ 25877.4  25701.6  25701.6  25701.6     73841.9  74241.9  74741.9  75141.9
+ 26115.0  25939.3  25763.6  25763.6     74290.4  74690.4  74949.0  75026.1
+ 26178.7  26240.6  26125.9  25950.2     74608.8  75138.9  75449.0  75227.1
+ 26178.7  26240.6  26363.9  26486.0     74857.3  75457.3  75934.3  75627.1
+ 26136.5  26011.8  26009.8  26007.8  …  75105.9  75705.9  76305.9  76027.1
+     ⋮                               ⋱      ⋮                      
+ 39101.2  39099.2  39097.2  39095.2     44093.3  44793.3  45193.3  45394.3
+ 39100.4  39098.4  39096.4  39094.4  …  44261.9  45493.3  45359.0  45595.3
+ 39099.5  39097.5  39095.5  39093.5     44261.1  45174.0  45066.9  45567.9
+ 39098.7  39096.7  39094.7  39092.7     43335.5  43935.5  45235.5  45418.3
+ 39099.5  39097.5  39095.5  39093.5     43087.0  43687.0  44287.0  45587.0
+ 39100.4  39098.4  39096.4  39094.4     42962.3  43562.3  44162.3  44762.3</code></pre><p>Setting some land cover classes to NoData resulted in some vertices being completely isolated from the vertices from which we calculated cost distances above. In these cases, <code>dijkstra_shortest_paths</code> returns a value of <code>Inf</code> for the cost distance. Let&#39;s get rid of those by setting them to the NoData value of our raster.</p><pre><code class="language-julia hljs">cwd_sum[cwd_sum .== Inf] .= -9999.</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">1340-element view(::Array{Float64, 3}, CartesianIndex{3}[CartesianIndex(525, 46, 1), CartesianIndex(494, 65, 1), CartesianIndex(384, 144, 1), CartesianIndex(384, 145, 1), CartesianIndex(287, 151, 1), CartesianIndex(287, 152, 1), CartesianIndex(287, 153, 1), CartesianIndex(352, 165, 1), CartesianIndex(424, 168, 1), CartesianIndex(425, 168, 1)  …  CartesianIndex(609, 630, 1), CartesianIndex(653, 641, 1), CartesianIndex(666, 641, 1), CartesianIndex(242, 665, 1), CartesianIndex(245, 665, 1), CartesianIndex(246, 665, 1), CartesianIndex(247, 665, 1), CartesianIndex(248, 665, 1), CartesianIndex(246, 666, 1), CartesianIndex(247, 666, 1)]) with eltype Float64:
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+     ⋮
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0
+ -9999.0</code></pre><p>Finally, let&#39;s plot the result! We&#39;ll use a threshold the set pixels above a certain value to NoData, so we will only retain the pixels within our &quot;corridor&quot;.</p><pre><code class="language-julia hljs">corridor = copy(cwd_sum)
+corridor[cwd_sum .&gt;= (minimum(cwd_sum[cwd_sum .&gt;= 0]) + 250)] .= -9999
+
+plot(
+    cwd_sum,
+    title = &quot;Cost Distance Corridor&quot;,
+    xlabel = &quot;Easting&quot;, ylabel = &quot;Northing&quot;,
+    colorbar_title = &quot; \nCost Distance Sum&quot;,
+    size = (650, 475)
+)</code></pre><img src='../figs/corridor_plot.png' width=500><br></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../userguide/">« User Guide</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.10 on <span class="colophon-date" title="Friday 19 November 2021 21:01">Friday 19 November 2021</span>. Using Julia version 1.6.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
