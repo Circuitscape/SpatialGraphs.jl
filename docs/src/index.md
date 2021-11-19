@@ -8,3 +8,9 @@ network processes. AbstractSpatialGraphs are AbstractGraphs, so methods from
 Graphs.jl work right out of the box. Go to [Graph Types](@ref graph_types) 
 for more details on the graph types implemented in this package.
 
+### Table of Contents
+
+```@contents
+Pages = ["graphtypes.md","userguide.md", "examples.md"]
+Depth = 2
+```

@@ -16,5 +16,4 @@ export AbstractSpatialGraph, AbstractRasterGraph, RasterGraph,
 export make_weighted_raster_graph, weightedrastergraph,
     make_simple_raster_graph, rastergraph
 
-
 end # module
