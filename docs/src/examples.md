@@ -2,6 +2,11 @@
 
 ## Habitat Corridor Mapping
 
+In this example, we'll map a habitat corridor in cnetral Maryland. We'll use
+SpatialGraphs.jl to convert the landscape into a graph, then calculate cost 
+distances, and finally convert the result back into a raster to display a
+least cost corridor in space.
+
 First, install the necessary packages and import them:
 
 ```julia
