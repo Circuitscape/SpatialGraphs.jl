@@ -2,7 +2,7 @@
 
 ## Habitat Corridor Mapping
 
-In this example, we'll map a habitat corridor in cnetral Maryland. We'll use
+In this example, we'll map a habitat corridor in central Maryland. We'll use
 SpatialGraphs.jl to convert the landscape into a graph, then calculate cost 
 distances, and finally convert the result back into a raster to display a
 least cost corridor in space.
@@ -30,8 +30,8 @@ nothing
 
 Now, let's download the land cover map that we'll use as the basis for defining
 the weights of our graph, and plot it. Graph weights correspond to the cost of 
-an animal moving from one graph vertex to another. This is also commonly refered
-to as resistance in the context of connectivity modeling.
+an animal moving from one graph vertex to another. This is also commonly 
+referred to as "resistance" in the context of connectivity modeling.
 
 ```julia
 url_base = "https://raw.githubusercontent.com/Circuitscape/datasets/main/"
@@ -51,8 +51,8 @@ plot(Raster("nlcd_2016_frederick_md.tif"), title = "Land Cover Type",
 <img src='../figs/mdlc.png' width=500><br>
 ```
 
-Load the land cover data as a Raster, convert it to Float64, and read it into
-memory.
+Load the land cover data as a Raster, read it into memory, then convert it to 
+Float64.
 
 ```@example corridors
 landcover = convert.(
@@ -103,7 +103,7 @@ end
 
 Now that we have a resistance raster, we can start using SpatialGraphs.jl!
 
-Convert the resistance raster into a `WeightedRasterGraph`:
+Convert the resistance raster into a [`WeightedRasterGraph`](@ref WeightedRasterGraph):
 
 ```@example corridors
 wrg = weightedrastergraph(resistance)
@@ -117,7 +117,7 @@ the second argument to `dijkstra_shortest_paths`, correspond to the values in
 wrg.vertex_raster.
 
 First, we'll use `dijkstra_shortest_paths` to calculate to total cost distance
-from each vertex of interest to all other vertices in the graph
+from each vertex of interest to all other vertices in the graph.
 
 ```@example corridors
 cd_1 = dijkstra_shortest_paths(wrg, 1)
@@ -126,7 +126,9 @@ cd_2 = dijkstra_shortest_paths(wrg, 348021)
 
 Now, create placeholder rasters to store the cost distance values for each 
 vertex, and populate them using the cost distances calculated
-above. Finally, we'll sum the 
+above. Finally, we'll sum the rasters to enable us to delineate a corridor. 
+The value at each pixel corresponds to the total cost distance of the least cost
+path between vertices 1 and 348021 that intersects that pixel.
 
 ```@example corridors
 # Create rasters
@@ -160,10 +162,10 @@ the cost distance. Let's get rid of those by setting them to the NoData value
 of our raster.
 
 ```@example corridors
-cwd_sum[cwd_sum .== Inf] .= -9999.
+cwd_sum[cwd_sum .== Inf] .= cwd_sum.missingval
 ```
 
-Finally, let's plot the result! We'll use a threshold the set pixels above
+Finally, let's plot the result! We'll use a threshold to set pixels above
 a certain value to NoData, so we will only retain the pixels within our
 "corridor".
 
