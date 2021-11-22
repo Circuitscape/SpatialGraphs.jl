@@ -1,7 +1,7 @@
 name = "SpatialGraphs"
 uuid = "c8109be6-b162-4503-8829-8b6b29b93f50"
 authors = ["Vincent A. Landau <vincent@csp-inc.org>"]
-version = "0.0.1"
+version = "0.1.0"
 
 [deps]
 Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
