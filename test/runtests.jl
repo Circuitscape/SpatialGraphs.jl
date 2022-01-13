@@ -20,6 +20,10 @@ end
     include("graph_interface.jl")
 end
 
+@testset "Graphs with patches" begin
+    include("patches.jl")
+end
+
 printstyled("Checking that Base.show works...\n", bold = true)
 
 A_array = Array{Float64}(undef, (3, 4, 1))
