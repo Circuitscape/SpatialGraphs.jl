@@ -2,11 +2,10 @@
     make_vertex_raster(A::Raster)
 
 Constuct a vertex raster (a raster where the value of each pixel corresponds
-to its ID in a graph, and 0s correspond to NoData). Returns a `Raster``. This 
-function is recommended for internal use only.
+to its ID in a graph, and 0s correspond to NoData). Returns a `Raster`.
 
 ## Parameters
-`A`: The `Raster`` from which a graph will be built, which is used as the
+`A`: The `Raster` from which a graph will be built, which is used as the
 reference for building the vertex raster. Pixels with NoData (`A.missingval`)
 are skipped (no vertex is assigned). Pixels with NoData will get a value of 0 in
 the vertex raster.
@@ -19,6 +18,53 @@ function make_vertex_raster(A::Raster)
 
     nodemap[is_node] = 1:sum(is_node)
 
+    nodemap = Raster(nodemap, dims(A), missingval = 0)
+
+    nodemap
+end
+
+
+"""
+    make_vertex_raster(A::Raster, patches::Raster)
+
+Constuct a vertex raster (a raster where the value of each pixel corresponds
+to its ID in a graph, and 0s correspond to NoData). Returns a `Raster`.
+
+## Parameters
+`A`: The `Raster` from which a graph will be built, which is used as the
+reference for building the vertex raster. Pixels with NoData (`A.missingval`)
+are skipped (no vertex is assigned). Pixels with NoData will get a value of 0 in
+the vertex raster.
+
+`patches`: A `Raster` defining patches that may consist of multiple pixels
+but should be considered a single vertex in the graph. patches must have the 
+same dimensions a `A`. Each patch should have its own unique value, starting 
+with 1, and ending with n, where n is the total number of patches (e.g. if you 
+have 3 patches, pixels in the first patch should have a value of 1, the second
+patch a value of 2, and the third patch a value of 3). Non-patch pixels can 
+either be labeled with 0 of the raster's `missingval`.
+"""
+function make_vertex_raster(A::Raster, patches::Raster)
+    # Make an array of unique node identifiers 
+    nodemap = zeros(Int64, size(A.data))
+    is_node = (A.data .!= A.missingval) .&
+        ((!).(isnan.(A.data)))
+
+    # Start by filling in the patches
+
+    # Check for correctness of patch raster
+    patch_vals = patches.data[(patches.data .!= patches.missingval) .& (patches.data .!= 0)]
+    if sort(unique(patch_vals)) != 1:maximum(patch_vals)
+        throw(ArgumentError("Patches must be labeled with numbers from 1 to n, where n is the number of patches, with no numbers skipped."))
+    end
+
+    n_patch = maximum(patches)
+    for i in 1:n_patch
+        nodemap[is_node .& (patches.data .== i)] .= i
+    end
+
+    is_matrix_node = is_node .& (nodemap .== 0)
+    nodemap[is_matrix_node] .= (n_patch + 1):(n_patch + sum(is_matrix_node))
     nodemap = Raster(nodemap, dims(A), missingval = 0)
 
     nodemap
@@ -117,6 +163,7 @@ function weightedrastergraph(
     return sg
 end
 
+
 """
     rastergraph(
         raster::Raster;
@@ -184,6 +231,7 @@ function rastergraph(
 
     return sg
 end
+
 
 """
     make_weighted_raster_graph(
