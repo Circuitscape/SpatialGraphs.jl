@@ -12,6 +12,6 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
 Graphs = "1.4"
-Rasters = "0.1.1"
+Rasters = "0.1.1, 0.2, 0.3, 0.4, 0.5"
 SimpleWeightedGraphs = "1.2"
 julia = "1.6"
